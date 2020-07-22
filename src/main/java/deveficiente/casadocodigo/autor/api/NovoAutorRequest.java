@@ -1,21 +1,23 @@
 package deveficiente.casadocodigo.autor.api;
 
 import deveficiente.casadocodigo.autor.dominio.Autor;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import deveficiente.casadocodigo.commons.api.validators.Unique;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Data
+@Getter
+@ToString
+@EqualsAndHashCode(of = "email")
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class NovoAutorRequest {
     @Email
     @NotNull
+    @Unique(target = Autor.class, field = "email", message = "{email.ja.cadastrado}")
     private String email;
     @NotEmpty
     private String nome;

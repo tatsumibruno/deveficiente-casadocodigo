@@ -14,9 +14,9 @@ import javax.validation.constraints.Size;
 import java.util.UUID;
 
 @Getter
+@Entity
 @ToString
 @EqualsAndHashCode(of = "email")
-@Entity
 public class Autor {
     @Id
     @GeneratedValue

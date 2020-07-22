@@ -1,20 +1,16 @@
 package deveficiente.casadocodigo.autor.api;
 
 import deveficiente.casadocodigo.autor.dominio.Autor;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class AutorDTO {
-    private UUID id;
-    private String email;
-    private String nome;
-    private String descricao;
+    private final UUID id;
+    private final String email;
+    private final String nome;
+    private final String descricao;
 
     public static AutorDTO from(Autor autor) {
         return new AutorDTO(autor.getId(),
