@@ -1,4 +1,4 @@
-package deveficiente.casadocodigo.infra.advice;
+package deveficiente.casadocodigo.commons.infra.advice;
 
 import lombok.Data;
 

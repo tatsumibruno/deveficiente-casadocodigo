@@ -1,8 +1,6 @@
 package deveficiente.casadocodigo.autor.dominio;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,13 +15,14 @@ import java.util.UUID;
 @Entity
 @ToString
 @EqualsAndHashCode(of = "email")
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Autor {
     @Id
     @GeneratedValue
     private UUID id;
-    private final String email;
-    private final String nome;
-    private final String descricao;
+    private String email;
+    private String nome;
+    private String descricao;
 
     public Autor(@Email @NotNull String email, @NotEmpty String nome, @NotEmpty @Size(max = 400) String descricao) {
         this.email = email;

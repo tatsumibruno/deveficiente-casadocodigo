@@ -1,7 +1,7 @@
 package deveficiente.casadocodigo.autor.api;
 
 import deveficiente.casadocodigo.autor.dominio.Autor;
-import deveficiente.casadocodigo.commons.api.validators.Unique;
+import deveficiente.casadocodigo.commons.api.validators.Unico;
 import lombok.*;
 
 import javax.validation.constraints.Email;
@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 public class NovoAutorRequest {
     @Email
     @NotNull
-    @Unique(target = Autor.class, field = "email", message = "{email.ja.cadastrado}")
+    @Unico(targetClass = Autor.class, field = "email", message = "{email.ja.cadastrado}")
     private String email;
     @NotEmpty
     private String nome;

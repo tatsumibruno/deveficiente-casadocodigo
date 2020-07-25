@@ -7,21 +7,16 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Target({ ElementType.FIELD, ElementType.PARAMETER, ANNOTATION_TYPE })
+@Target(ElementType.FIELD)
 @Retention(RUNTIME)
-@Constraint(validatedBy = UniqueValidator.class)
+@Constraint(validatedBy = UnicoValidator.class)
 @Documented
-public @interface Unique {
+public @interface Unico {
     String message() default "{registro.ja.existe}";
-
     Class<?>[] groups() default {};
-
     Class<? extends Payload>[] payload() default {};
-
-    Class<?> target();
-
+    Class<?> targetClass();
     String field();
 }

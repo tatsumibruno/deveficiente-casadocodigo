@@ -12,7 +12,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 @Component
-public class UniqueValidator implements ConstraintValidator<Unique, Object> {
+public class UnicoValidator implements ConstraintValidator<Unico, Object> {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -20,8 +20,8 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
     private String field;
 
     @Override
-    public void initialize(Unique annotation) {
-        targetClass = annotation.target();
+    public void initialize(Unico annotation) {
+        targetClass = annotation.targetClass();
         field = annotation.field();
     }
 

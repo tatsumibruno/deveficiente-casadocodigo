@@ -1,4 +1,4 @@
-package deveficiente.casadocodigo.infra.advice;
+package deveficiente.casadocodigo.commons.infra.advice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -33,6 +33,14 @@ public class ValidationErrorHandlers {
                 responseError.addDetail(messageSource.getMessage(error.getCode(), error.getArguments(), locale));
             }
         }
+        return responseError;
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public MessageError handleValidationErrors(IllegalArgumentException exception, Locale locale) {
+        MessageError responseError = new MessageError(messageSource.getMessage("validation.errors.title", null, locale));
+        responseError.addDetail(messageSource.getMessage(exception.getMessage(), null, exception.getMessage(), locale));
         return responseError;
     }
 }
