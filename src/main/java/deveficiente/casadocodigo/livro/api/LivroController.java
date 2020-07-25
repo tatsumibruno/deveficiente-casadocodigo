@@ -1,17 +1,17 @@
 package deveficiente.casadocodigo.livro.api;
 
+import com.google.common.collect.Lists;
 import deveficiente.casadocodigo.autor.dominio.AutorRepository;
 import deveficiente.casadocodigo.categoria.dominio.CategoriaRepository;
 import deveficiente.casadocodigo.livro.dominio.Livro;
 import deveficiente.casadocodigo.livro.dominio.LivroRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 @Validated
 @RestController
@@ -33,5 +33,13 @@ public class LivroController {
         Livro livro = novoLivro.entity(categoriaRepository, autorRepository);
         livroRepository.save(livro);
         return ResponseEntity.ok(LivroDTO.from(livro));
+    }
+
+    @GetMapping
+    public Collection<LivroDTO> listarTodos() {
+        return Lists.newArrayList(livroRepository.findAll())
+                .stream()
+                .map(LivroDTO::from)
+                .collect(Collectors.toList());
     }
 }

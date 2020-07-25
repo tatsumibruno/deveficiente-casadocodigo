@@ -18,7 +18,6 @@ import java.util.UUID;
 @Builder
 @ToString(of = {"id", "isbn", "titulo", "preco"})
 @EqualsAndHashCode(of = "id")
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Livro {
     @Id
@@ -56,6 +55,10 @@ public class Livro {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id", foreignKey = @ForeignKey(name = "livro_autor_fk"))
     private Autor autor;
+
+    @Deprecated
+    Livro() {
+    }
 
     public static class LivroBuilder {
         //Não faz sentido passar o ID na criação, sobrescrevendo lombok

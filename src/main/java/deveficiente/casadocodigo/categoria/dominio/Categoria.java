@@ -1,6 +1,8 @@
 package deveficiente.casadocodigo.categoria.dominio;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,13 +14,16 @@ import java.util.UUID;
 @Entity
 @ToString
 @EqualsAndHashCode(of = "nome")
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Categoria {
     @Id
     @GeneratedValue
     private UUID id;
     @NotNull
     private String nome;
+
+    @Deprecated
+    Categoria() {
+    }
 
     public Categoria(@NotNull String nome) {
         this.nome = nome;
