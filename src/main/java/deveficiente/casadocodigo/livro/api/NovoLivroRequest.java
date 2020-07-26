@@ -3,7 +3,7 @@ package deveficiente.casadocodigo.livro.api;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import deveficiente.casadocodigo.autor.dominio.AutorRepository;
 import deveficiente.casadocodigo.categoria.dominio.CategoriaRepository;
-import deveficiente.casadocodigo.commons.api.validators.Unico;
+import deveficiente.casadocodigo.commons.api.validators.Unique;
 import deveficiente.casadocodigo.livro.dominio.Livro;
 import lombok.*;
 
@@ -20,7 +20,7 @@ import java.util.UUID;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class NovoLivroRequest {
     @NotEmpty
-    @Unico(field = "titulo", targetClass = Livro.class)
+    @Unique(field = "titulo", targetClass = Livro.class)
     private String titulo;
     @NotNull
     @Size(min = 1, max = 500)
@@ -33,7 +33,7 @@ public class NovoLivroRequest {
     @Min(100)
     private long numeroPaginas;
     @NotEmpty
-    @Unico(field = "isbn", targetClass = Livro.class)
+    @Unique(field = "isbn", targetClass = Livro.class)
     private String isbn;
     @Future
     @JsonFormat(pattern = "dd/MM/yyyy")

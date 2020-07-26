@@ -11,9 +11,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target(ElementType.FIELD)
 @Retention(RUNTIME)
-@Constraint(validatedBy = UnicoValidator.class)
+@Constraint(validatedBy = UniqueValidator.class)
 @Documented
-public @interface Unico {
+public @interface Unique {
     String message() default "{registro.ja.existe}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
