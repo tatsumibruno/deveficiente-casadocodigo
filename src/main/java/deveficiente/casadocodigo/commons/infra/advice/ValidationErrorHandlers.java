@@ -1,5 +1,6 @@
 package deveficiente.casadocodigo.commons.infra.advice;
 
+import deveficiente.casadocodigo.commons.exceptions.RegistroNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -42,5 +43,11 @@ public class ValidationErrorHandlers {
         MessageError responseError = new MessageError(messageSource.getMessage("validation.errors.title", null, locale));
         responseError.addDetail(messageSource.getMessage(exception.getMessage(), null, exception.getMessage(), locale));
         return responseError;
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(RegistroNaoEncontradoException.class)
+    public MessageError handleRegistroNaoEncontrado(RegistroNaoEncontradoException exception, Locale locale) {
+        return new MessageError(messageSource.getMessage("registro.nao.encontrado", null, locale));
     }
 }

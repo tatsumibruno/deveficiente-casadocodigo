@@ -82,4 +82,8 @@ public class Livro {
     public String getNomeAutor() {
         return autor.getNome();
     }
+
+    public String getDescricaoAutor() {
+        return autor.getDescricao();
+    }
 }

@@ -3,6 +3,7 @@ package deveficiente.casadocodigo.livro.api;
 import com.google.common.collect.Lists;
 import deveficiente.casadocodigo.autor.dominio.AutorRepository;
 import deveficiente.casadocodigo.categoria.dominio.CategoriaRepository;
+import deveficiente.casadocodigo.commons.exceptions.RegistroNaoEncontradoException;
 import deveficiente.casadocodigo.livro.dominio.Livro;
 import deveficiente.casadocodigo.livro.dominio.LivroRepository;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Validated
@@ -41,5 +43,12 @@ public class LivroController {
                 .stream()
                 .map(LivroDTO::from)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping(path = "/{id}/detalhes")
+    public DetalhesLivroResponse detalhes(@PathVariable UUID id) {
+        Livro livro = livroRepository.findById(id)
+                .orElseThrow(RegistroNaoEncontradoException::new);
+        return DetalhesLivroResponse.from(livro);
     }
 }
