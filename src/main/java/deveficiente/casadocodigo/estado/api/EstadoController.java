@@ -15,12 +15,12 @@ import javax.validation.Valid;
 @Validated
 @RestController
 @RequestMapping(path = "/api/v1/estados")
-public class EstradoController {
+public class EstadoController {
 
     private final PaisRepository paisRepository;
     private final EstadoRepository estadoRepository;
 
-    public EstradoController(PaisRepository paisRepository, EstadoRepository estadoRepository) {
+    public EstadoController(PaisRepository paisRepository, EstadoRepository estadoRepository) {
         this.paisRepository = paisRepository;
         this.estadoRepository = estadoRepository;
     }
