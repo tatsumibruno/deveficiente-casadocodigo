@@ -17,10 +17,11 @@ import java.util.UUID;
 })
 @Builder
 @ToString(of = {"id", "isbn", "titulo", "preco"})
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "isbn")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Livro {
     @Id
+    @Setter
     @Getter
     @GeneratedValue
     private UUID id;
