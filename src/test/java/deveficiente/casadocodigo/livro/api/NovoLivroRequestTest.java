@@ -15,14 +15,14 @@ import java.util.UUID;
 
 @Tag("unit")
 @SpringBootTest
-public class NovoLivroRequestTest {
+class NovoLivroRequestTest {
 
     @Autowired
     private LivroController livroController;
 
     @Test
     @DisplayName("O título do livro deve ser obrigatório")
-    public void tituloObrigatorio() {
+    void tituloObrigatorio() {
         assertConstraintViolation(novoLivroCompletoBuilder()
                 .titulo(null)
                 .build());
@@ -30,7 +30,7 @@ public class NovoLivroRequestTest {
 
     @Test
     @DisplayName("O resumo do livro deve ter no máximo 500 caracteres")
-    public void resumoMax500() {
+    void resumoMax500() {
         assertConstraintViolation(novoLivroCompletoBuilder()
                 .resumo(Strings.repeat("A", 501))
                 .build());
@@ -38,7 +38,7 @@ public class NovoLivroRequestTest {
 
     @Test
     @DisplayName("O resumo do livro deve ser obrigatório")
-    public void resumoObrigatorio() {
+    void resumoObrigatorio() {
         assertConstraintViolation(novoLivroCompletoBuilder()
                 .resumo(null)
                 .build());
@@ -46,7 +46,7 @@ public class NovoLivroRequestTest {
 
     @Test
     @DisplayName("O preço deve ser obrigatório")
-    public void precoObrigatorio() {
+    void precoObrigatorio() {
         assertConstraintViolation(novoLivroCompletoBuilder()
                 .preco(null)
                 .build());
@@ -54,7 +54,7 @@ public class NovoLivroRequestTest {
 
     @Test
     @DisplayName("O preço deve ser maior ou igual à 20")
-    public void precoMin20() {
+    void precoMin20() {
         assertConstraintViolation(novoLivroCompletoBuilder()
                 .preco(BigDecimal.valueOf(19.99))
                 .build());
@@ -62,7 +62,7 @@ public class NovoLivroRequestTest {
 
     @Test
     @DisplayName("O número de páginas deve ser maior ou igual à 100")
-    public void paginasMin100() {
+    void paginasMin100() {
         assertConstraintViolation(novoLivroCompletoBuilder()
                 .numeroPaginas(99)
                 .build());
@@ -70,7 +70,7 @@ public class NovoLivroRequestTest {
 
     @Test
     @DisplayName("O ISBN deve ser obrigatório")
-    public void isbnObrigatorio() {
+    void isbnObrigatorio() {
         assertConstraintViolation(novoLivroCompletoBuilder()
                 .isbn(null)
                 .build());
@@ -78,7 +78,7 @@ public class NovoLivroRequestTest {
 
     @Test
     @DisplayName("Data de publicação deve estar no futuro")
-    public void dataPublicacao() {
+    void dataPublicacao() {
         assertConstraintViolation(novoLivroCompletoBuilder()
                 .dataPublicacao(LocalDate.now().minusDays(1))
                 .build());

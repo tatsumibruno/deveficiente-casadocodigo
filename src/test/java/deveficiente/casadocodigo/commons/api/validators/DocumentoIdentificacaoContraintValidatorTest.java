@@ -8,41 +8,41 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class DocumentoIdentificacaoContraintValidatorTest {
+class DocumentoIdentificacaoContraintValidatorTest {
 
     private DocumentoIdentificacaoContraintValidator validator = new DocumentoIdentificacaoContraintValidator();
 
     @Test
     @DisplayName("CPF e CNPJ preenchidos não deve ser válido")
-    public void t1() {
+    void t1() {
         boolean documentoIdentificacaoValido = validator.isValid(new DocumentoIdentificacaoRequestTest("1", "1"), null);
         Assertions.assertFalse(documentoIdentificacaoValido);
     }
 
     @Test
     @DisplayName("CPF e CNPJ em branco não deve ser válido")
-    public void t2() {
+    void t2() {
         boolean documentoIdentificacaoValido = validator.isValid(new DocumentoIdentificacaoRequestTest("", ""), null);
         Assertions.assertFalse(documentoIdentificacaoValido);
     }
 
     @Test
     @DisplayName("CPF e CNPJ nulos não deve ser válido")
-    public void t3() {
+    void t3() {
         boolean documentoIdentificacaoValido = validator.isValid(new DocumentoIdentificacaoRequestTest(null, null), null);
         Assertions.assertFalse(documentoIdentificacaoValido);
     }
 
     @Test
     @DisplayName("Somente CPF informado deve ser válido")
-    public void t4() {
+    void t4() {
         boolean documentoIdentificacaoValido = validator.isValid(new DocumentoIdentificacaoRequestTest("1", null), null);
         Assertions.assertTrue(documentoIdentificacaoValido);
     }
 
     @Test
     @DisplayName("Somente CNPJ informado deve ser válido")
-    public void t5() {
+    void t5() {
         boolean documentoIdentificacaoValido = validator.isValid(new DocumentoIdentificacaoRequestTest(null, "1"), null);
         Assertions.assertTrue(documentoIdentificacaoValido);
     }

@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class LivroIT {
+class LivroIT {
 
     private static final String URI = "/api/v1/livros";
 
@@ -51,14 +51,14 @@ public class LivroIT {
     private Autor autor;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         categoria = categoriaRepository.save(new Categoria("categoria"));
         autor = autorRepository.save(new Autor("autor@gmail.com", "autor", "descricao autor"));
     }
 
     @Test
     @DisplayName("Ao informar os dados corretamente, o sistema deve registrar o novo livro")
-    public void novoLivro() throws Exception {
+    void novoLivro() throws Exception {
         NovoLivroRequest request = NovoLivroRequest.builder()
                 .dataPublicacao(LocalDate.now().plusMonths(1))
                 .isbn("isbn")
@@ -87,7 +87,7 @@ public class LivroIT {
 
     @Test
     @DisplayName("O título do livro deve ser único")
-    public void tituloRepetido() throws Exception {
+    void tituloRepetido() throws Exception {
         Livro livroExistente = Livro.builder()
                 .dataPublicacao(LocalDate.now().plusMonths(1))
                 .isbn("123")
@@ -123,7 +123,7 @@ public class LivroIT {
 
     @Test
     @DisplayName("O ISBN do livro deve ser único")
-    public void isbnRepetido() throws Exception {
+    void isbnRepetido() throws Exception {
         Livro livroExistente = Livro.builder()
                 .dataPublicacao(LocalDate.now().plusMonths(1))
                 .isbn("123")
@@ -159,7 +159,7 @@ public class LivroIT {
 
     @Test
     @DisplayName("O livro deve ter um autor existente")
-    public void autorNaoExiste() throws Exception {
+    void autorNaoExiste() throws Exception {
         NovoLivroRequest request = NovoLivroRequest.builder()
                 .dataPublicacao(LocalDate.now().plusMonths(1))
                 .isbn("123")
@@ -182,7 +182,7 @@ public class LivroIT {
 
     @Test
     @DisplayName("O livro deve ter uma categoria existente")
-    public void categoriaNaoExiste() throws Exception {
+    void categoriaNaoExiste() throws Exception {
         NovoLivroRequest request = NovoLivroRequest.builder()
                 .dataPublicacao(LocalDate.now().plusMonths(1))
                 .isbn("123")

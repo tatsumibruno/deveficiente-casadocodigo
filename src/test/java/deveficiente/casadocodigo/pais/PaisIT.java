@@ -25,7 +25,7 @@ import javax.transaction.Transactional;
 @Transactional
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PaisIT {
+class PaisIT {
 
     private static final String API_PATH = "/api/v1/paises";
 
@@ -38,7 +38,7 @@ public class PaisIT {
 
     @Test
     @DisplayName("Ao informar o nome corretamente, o país deve ser cadastrado")
-    public void novoPais() throws Exception {
+    void novoPais() throws Exception {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post(API_PATH)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .locale(TestConstants.PT_BR)
@@ -54,7 +54,7 @@ public class PaisIT {
 
     @Test
     @DisplayName("O nome do país deve ser obrigatório")
-    public void semNome() throws Exception {
+    void semNome() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post(API_PATH)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .locale(TestConstants.PT_BR)
@@ -66,7 +66,7 @@ public class PaisIT {
 
     @Test
     @DisplayName("O nome do país deve ser único")
-    public void duplicado() throws Exception {
+    void duplicado() throws Exception {
         paisRepository.save(new Pais("Argentina"));
 
         mockMvc.perform(MockMvcRequestBuilders.post(API_PATH)

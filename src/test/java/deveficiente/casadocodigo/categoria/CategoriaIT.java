@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 @SpringBootTest
 @AutoConfigureMockMvc
-public class CategoriaIT {
+class CategoriaIT {
 
     private static final String API_PATH = "/api/v1/categorias";
 
@@ -41,7 +41,7 @@ public class CategoriaIT {
 
     @Test
     @DisplayName("Deve criar uma categoria com os dados informados corretamente")
-    public void criarCategoria() throws Exception {
+    void criarCategoria() throws Exception {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .post(API_PATH)
                 .characterEncoding("UTF-8")
@@ -61,7 +61,7 @@ public class CategoriaIT {
 
     @Test
     @DisplayName("Ao informar dados inválidos, o sistema não deve cadastrar a categoria")
-    public void categoriaInvalida() throws Exception {
+    void categoriaInvalida() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
                 .post(API_PATH)
                 .contentType(APPLICATION_JSON_VALUE)
@@ -72,7 +72,7 @@ public class CategoriaIT {
 
     @Test
     @DisplayName("Não deve permitir categorias com nomes duplicados")
-    public void categoriaJaExistente() throws Exception {
+    void categoriaJaExistente() throws Exception {
         categoriaRepository.save(new Categoria("categoria existente"));
 
         mockMvc.perform(MockMvcRequestBuilders

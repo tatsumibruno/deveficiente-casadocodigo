@@ -106,6 +106,6 @@ class CompraRequestTest {
                 ))
                 .build();
         IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> request.entity(estadoRepository, livroRepository));
-        Assertions.assertTrue("valor.compra.diferente.calculado".equals(exception.getMessage()));
+        Assertions.assertEquals("valor.compra.diferente.calculado", exception.getMessage());
     }
 }

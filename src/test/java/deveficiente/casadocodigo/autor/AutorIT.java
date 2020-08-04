@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 @SpringBootTest
 @AutoConfigureMockMvc
-public class AutorIT {
+class AutorIT {
 
     private static final String API_PATH = "/api/v1/autores";
 
@@ -44,7 +44,7 @@ public class AutorIT {
 
     @Test
     @DisplayName("Deve criar um autor com os dados informados corretamente")
-    public void criarAutor() throws Exception {
+    void criarAutor() throws Exception {
         NovoAutorRequest novoAutor = new NovoAutorRequest("teste@gmail.com", "nome do autor", "descrição do autor");
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
@@ -68,7 +68,7 @@ public class AutorIT {
 
     @Test
     @DisplayName("Ao informar dados inválidos, o sistema não deve cadastrar o autor")
-    public void autorInvalido() throws Exception {
+    void autorInvalido() throws Exception {
         List<NovoAutorRequest> requisicoesInvalidas = Lists.newArrayList(
                 new NovoAutorRequest(null, "nome do autor", "descrição do autor"),
                 new NovoAutorRequest("emailinvalido", "nome do autor", "descrição do autor"),
@@ -89,7 +89,7 @@ public class AutorIT {
 
     @Test
     @DisplayName("Não deve permitir e-mails duplicados")
-    public void validacaoEmail() throws Exception {
+    void validacaoEmail() throws Exception {
         Autor autorExistente = new Autor("autor.existente@gmail.com", "Autor existente", "Autor que já existe no banco");
         autorRepository.save(autorExistente);
 

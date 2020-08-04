@@ -25,7 +25,7 @@ import java.util.UUID;
 @SpringBootTest
 @Transactional
 @AutoConfigureMockMvc
-public class EstadoIT {
+class EstadoIT {
 
     private static final String API_PATH = "/api/v1/estados";
 
@@ -47,7 +47,7 @@ public class EstadoIT {
 
     @Test
     @DisplayName("Ao informar os dados corretamente, o estado deve ser cadastrado")
-    public void novoEstado() throws Exception {
+    void novoEstado() throws Exception {
         NovoEstadoRequest estado = new NovoEstadoRequest("São Paulo", pais.getId());
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post(API_PATH)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -64,7 +64,7 @@ public class EstadoIT {
 
     @Test
     @DisplayName("O nome deve ser obrigatório")
-    public void nomeObrigatorio() throws Exception {
+    void nomeObrigatorio() throws Exception {
         NovoEstadoRequest estado = new NovoEstadoRequest(null, pais.getId());
         mockMvc.perform(MockMvcRequestBuilders.post(API_PATH)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -77,7 +77,7 @@ public class EstadoIT {
 
     @Test
     @DisplayName("O nome deve ser único")
-    public void nomeUnico() throws Exception {
+    void nomeUnico() throws Exception {
         estadoRepository.save(new Estado("São Paulo", pais));
         NovoEstadoRequest estado = new NovoEstadoRequest("São Paulo", pais.getId());
         mockMvc.perform(MockMvcRequestBuilders.post(API_PATH)
@@ -91,7 +91,7 @@ public class EstadoIT {
 
     @Test
     @DisplayName("O país deve ser obrigatório")
-    public void paisObrigatorio() throws Exception {
+    void paisObrigatorio() throws Exception {
         NovoEstadoRequest estado = new NovoEstadoRequest("São Paulo", null);
         mockMvc.perform(MockMvcRequestBuilders.post(API_PATH)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -104,7 +104,7 @@ public class EstadoIT {
 
     @Test
     @DisplayName("O país deve existir")
-    public void paisDeveExistir() throws Exception {
+    void paisDeveExistir() throws Exception {
         NovoEstadoRequest estado = new NovoEstadoRequest("São Paulo", UUID.randomUUID());
         mockMvc.perform(MockMvcRequestBuilders.post(API_PATH)
                 .contentType(MediaType.APPLICATION_JSON)
