@@ -42,13 +42,13 @@ class EstadoIT {
 
     @BeforeEach
     public void setup() {
-        pais = paisRepository.save(new Pais("Brasil"));
+        pais = paisRepository.save(new Pais("Novo País"));
     }
 
     @Test
     @DisplayName("Ao informar os dados corretamente, o estado deve ser cadastrado")
     void novoEstado() throws Exception {
-        NovoEstadoRequest estado = new NovoEstadoRequest("São Paulo", pais.getId());
+        NovoEstadoRequest estado = new NovoEstadoRequest("Novo Estado", pais.getId());
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post(API_PATH)
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding(TestConstants.DEFAULT_ENCODING)
@@ -58,8 +58,8 @@ class EstadoIT {
                 .andReturn();
         EstadoDTO resposta = objectMapper.readValue(result.getResponse().getContentAsByteArray(), EstadoDTO.class);
         Estado estadoCriado = estadoRepository.findById(resposta.getId()).orElseThrow();
-        Assertions.assertEquals("São Paulo", estadoCriado.getNome());
-        Assertions.assertEquals("Brasil", resposta.getPais());
+        Assertions.assertEquals("Novo Estado", estadoCriado.getNome());
+        Assertions.assertEquals("Novo País", resposta.getPais());
     }
 
     @Test
@@ -105,7 +105,7 @@ class EstadoIT {
     @Test
     @DisplayName("O país deve existir")
     void paisDeveExistir() throws Exception {
-        NovoEstadoRequest estado = new NovoEstadoRequest("São Paulo", UUID.randomUUID());
+        NovoEstadoRequest estado = new NovoEstadoRequest("Novo Estado", UUID.randomUUID());
         mockMvc.perform(MockMvcRequestBuilders.post(API_PATH)
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding(TestConstants.DEFAULT_ENCODING)

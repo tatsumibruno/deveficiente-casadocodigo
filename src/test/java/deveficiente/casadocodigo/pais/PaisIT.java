@@ -43,7 +43,7 @@ class PaisIT {
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .locale(TestConstants.PT_BR)
                 .characterEncoding(TestConstants.DEFAULT_ENCODING)
-                .content(objectMapper.writeValueAsString(new NovoPaisRequest("Brasil"))))
+                .content(objectMapper.writeValueAsString(new NovoPaisRequest("Novo País"))))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
         PaisDTO resposta = objectMapper.readValue(result.getResponse().getContentAsByteArray(), PaisDTO.class);
