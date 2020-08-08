@@ -9,6 +9,6 @@ import java.util.UUID;
 public interface CompraRepository extends CrudRepository<Compra, UUID> {
 
     @Override
-    @Query("select compra from Compra compra join fetch compra.estado estado join fetch estado.pais")
+    @Query("select compra from Compra compra join fetch compra.estado estado join fetch estado.pais join fetch compra.pedido.itens")
     Optional<Compra> findById(UUID uuid);
 }

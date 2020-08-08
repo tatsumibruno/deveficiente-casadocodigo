@@ -46,4 +46,11 @@ public class CompraController {
         compra.aplicarDesconto(cupom);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CompraDTO> detalhesCompra(@PathVariable UUID id) {
+        Compra compra = compraRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("compra.nao.encontrada"));
+        return ResponseEntity.ok(CompraDTO.from(compra));
+    }
 }

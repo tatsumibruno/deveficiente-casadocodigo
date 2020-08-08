@@ -1,6 +1,5 @@
 package deveficiente.casadocodigo.livro.api;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import deveficiente.casadocodigo.autor.dominio.AutorRepository;
 import deveficiente.casadocodigo.categoria.dominio.CategoriaRepository;
 import deveficiente.casadocodigo.commons.api.validators.Unique;
@@ -36,7 +35,6 @@ public class NovoLivroRequest {
     @Unique(field = "isbn", targetClass = Livro.class)
     private String isbn;
     @Future
-    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataPublicacao;
     @NotNull
     private UUID idCategoria;
