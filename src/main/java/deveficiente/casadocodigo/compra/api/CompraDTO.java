@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(access = AccessLevel.PRIVATE, setterPrefix = "com")
 public class CompraDTO {
-
+    private UUID id;
     private String email;
     private String nome;
     private String sobrenome;
@@ -32,6 +32,7 @@ public class CompraDTO {
 
     public static CompraDTO from(Compra compra) {
         return CompraDTO.builder()
+                .comId(compra.getId())
                 .comEmail(compra.getEmail())
                 .comNome(compra.getNome())
                 .comSobrenome(compra.getSobrenome())

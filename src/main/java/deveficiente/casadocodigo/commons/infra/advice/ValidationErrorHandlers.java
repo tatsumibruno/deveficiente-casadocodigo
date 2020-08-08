@@ -1,5 +1,6 @@
 package deveficiente.casadocodigo.commons.infra.advice;
 
+import deveficiente.casadocodigo.commons.exceptions.BusinessException;
 import deveficiente.casadocodigo.commons.exceptions.RegistroNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -42,6 +43,14 @@ public class ValidationErrorHandlers {
     public MessageError handleValidationErrors(IllegalArgumentException exception, Locale locale) {
         MessageError responseError = new MessageError(messageSource.getMessage("validation.errors.title", null, locale));
         responseError.addDetail(messageSource.getMessage(exception.getMessage(), null, exception.getMessage(), locale));
+        return responseError;
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(BusinessException.class)
+    public MessageError handleValidationErrors(BusinessException exception, Locale locale) {
+        MessageError responseError = new MessageError(messageSource.getMessage("erro.negocio", null, locale));
+        responseError.addDetail(messageSource.getMessage(exception.getMessage(), exception.getArguments(), exception.getMessage(), locale));
         return responseError;
     }
 

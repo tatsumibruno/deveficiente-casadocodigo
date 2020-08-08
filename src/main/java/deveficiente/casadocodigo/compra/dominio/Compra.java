@@ -1,5 +1,6 @@
 package deveficiente.casadocodigo.compra.dominio;
 
+import deveficiente.casadocodigo.cupom_desconto.dominio.CupomDesconto;
 import deveficiente.casadocodigo.estado.dominio.Estado;
 import deveficiente.casadocodigo.livro.dominio.Livro;
 import lombok.*;
@@ -20,6 +21,7 @@ import java.util.UUID;
 public class Compra {
 
     @Id
+    @Getter
     @GeneratedValue
     private UUID id;
     @Email
@@ -52,8 +54,8 @@ public class Compra {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estado_id", foreignKey = @ForeignKey(name = "compra_estado_fk"))
     private Estado estado;
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "compra", cascade = CascadeType.ALL)
-    @JoinColumn(name = "pedido_id", foreignKey = @ForeignKey(name = "compra_pedido_fk"))
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY)
     private Pedido pedido;
     @CPF
     @Getter
@@ -91,6 +93,10 @@ public class Compra {
 
     public boolean valorTotalIgualAoCalculado() {
         return pedido.valorTotalIgualAoCalculado();
+    }
+
+    public void aplicarDesconto(@NonNull CupomDesconto cupom) {
+        pedido.aplicarDesconto(cupom);
     }
 
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -203,7 +209,7 @@ public class Compra {
         private Compra compra;
 
         public CompraBuilderPronto comValorTotal(BigDecimal valorTotal) {
-            compra.pedido = new Pedido(compra, valorTotal);
+            compra.pedido = new Pedido(valorTotal);
             return new CompraBuilderPronto(compra);
         }
     }

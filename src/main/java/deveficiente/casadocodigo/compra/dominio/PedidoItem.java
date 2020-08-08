@@ -25,7 +25,7 @@ public class PedidoItem implements Serializable {
     @Min(1)
     private int quantidade;
 
-    public BigDecimal getValorCalculado() {
+    BigDecimal getValorCalculado() {
         return livro.getPreco().multiply(BigDecimal.valueOf(quantidade));
     }
 }
